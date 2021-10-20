@@ -4,11 +4,13 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 //Registration
+
 router.post("/", async (req, res) => {
   try {
     const { username, password, passwordVerify } = req.body;
 
     //Validation
+
     if (!username || !password || !passwordVerify)
       return res
         .status(400)
@@ -30,20 +32,20 @@ router.post("/", async (req, res) => {
         errorMessage: "An account with this username already exists.",
       });
 
-    //Hash password
+    //Hash password string
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
-    //Save new user onto DB
-
+    //Save new user to DB
     const newUser = new User({
       username,
       passwordHash,
+      date : Date.now()
     });
 
     const savedUser = await newUser.save();
 
-    //Sign JWT Token
+    //Sign the Token
     const token = jwt.sign(
       {
         user: savedUser._id,
@@ -51,9 +53,8 @@ router.post("/", async (req, res) => {
       process.env.JWT_SECRET
     );
 
-    //Send the token in a HTTP-only cookie
-    res
-      .cookie("token", token, {
+    //Send http-only cookie
+    res.cookie("token", token, {
         httpOnly: true,
         secure: true,
         sameSite: "none",
@@ -70,7 +71,8 @@ router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    //Validate
+    //Validation
+
     if (!username || !password)
       return res
         .status(400)
@@ -87,15 +89,16 @@ router.post("/login", async (req, res) => {
     if (!passwordCorrect)
       return res.status(401).json({ errorMessage: "Wrong username or password." });
 
-    //Sign the Token
+    //Sign the token
+
     const token = jwt.sign(
       {
         user: existingUser._id,
       },
       process.env.JWT_SECRET
-    );
+    ); 
 
-    //Send the token in a HTTP-only cookie
+    //Send http-only cookie
     res
       .cookie("token", token, {
         httpOnly: true,

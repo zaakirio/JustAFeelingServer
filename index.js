@@ -6,8 +6,7 @@ const cors = require("cors");
 
 dotenv.config();
 
-// set up server
-
+//Set up Server
 const app = express();
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
@@ -23,8 +22,7 @@ app.use(
   })
 );
 
-// connect to mongoDB
-
+//Connect to MongoDB
 mongoose.connect(
   process.env.CONNECTION_STRING,
   {
@@ -37,6 +35,5 @@ mongoose.connect(
   }
 );
 
-// set up routes
-
+//Route
 app.use("/auth", require("./router/userRouter"));

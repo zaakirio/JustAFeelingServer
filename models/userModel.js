@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
         maxLength: 12,
         trim: true
     },
-    password: {
+    passwordHash: {
         type: String,
         required: true,
         minLength: 8
@@ -18,13 +18,7 @@ const userSchema = mongoose.Schema({
       type: Date,
       required: true,
       default: Date.now
-    },
-    tokens: [{
-        token: {
-            type: String,
-            required: true
-        }
-    }]
+    }
 });
 
 const User = mongoose.model("user", userSchema);
