@@ -2,15 +2,16 @@
   "name": "jaf-server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "env-cmd -f ./.env nodemon server.js"
+    "start": "node index"
   },
   "author": "zaakir",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "env-cmd": "^10.1.0",
