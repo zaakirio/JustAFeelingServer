@@ -4,28 +4,27 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 //Registration
-
 router.post("/", async (req, res) => {
   try {
     const { username, password, passwordVerify } = req.body;
 
     //Validation
-
+    ///Check all fields for input
     if (!username || !password || !passwordVerify)
       return res
         .status(400)
         .json({ errorMessage: "Please enter all required fields." });
-
+    //Check password length
     if (password.length < 6)
       return res.status(400).json({
         errorMessage: "Please enter a password of at least 6 characters.",
       });
-
+    //Check passwords match
     if (password !== passwordVerify)
       return res.status(400).json({
         errorMessage: "Please enter the same password twice.",
       });
-
+    //Check for existing user
     const existingUser = await User.findOne({ username });
     if (existingUser)
       return res.status(400).json({
@@ -46,14 +45,13 @@ router.post("/", async (req, res) => {
     const savedUser = await newUser.save();
 
     //Sign the Token
-    const token = jwt.sign(
-      {
+    const token = jwt.sign({
         user: savedUser._id,
       },
       process.env.JWT_SECRET
     );
 
-    //Send http-only cookie
+    //Send http-only cookie - prevents hijacking via JS
     res.cookie("token", token, {
         httpOnly: true,
         secure: true,
@@ -71,13 +69,12 @@ router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    //Validation
-
+    //Check all fields for input
     if (!username || !password)
       return res
         .status(400)
         .json({ errorMessage: "Please enter all required fields." });
-
+    //Vali
     const existingUser = await User.findOne({ username });
     if (!existingUser)
       return res.status(401).json({ errorMessage: "Wrong username or password." });
@@ -90,7 +87,6 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ errorMessage: "Wrong username or password." });
 
     //Sign the token
-
     const token = jwt.sign(
       {
         user: existingUser._id,

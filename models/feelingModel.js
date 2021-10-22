@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 //DB SCHEMA
-const userSchema = mongoose.Schema({
+const feelingSchema = mongoose.Schema({
     username: {
         type: String,
         required: true,
@@ -8,11 +8,12 @@ const userSchema = mongoose.Schema({
         maxLength: 12,
         trim: true
     },
-    passwordHash: {
+    feeling: {
         type: String,
         required: true,
-        minLength: 8
-        //maxLength: 50
+        minLength: 50,
+        maxLength: 1000,
+        trim: true
     },
     date: {
       type: Date,
@@ -21,6 +22,6 @@ const userSchema = mongoose.Schema({
     }
 });
 //Access MongoDB
-const User = mongoose.model("user", userSchema);
+const Feeling = mongoose.model("feeling", userSchema);
 
-module.exports = User;
+module.exports = Feeling;

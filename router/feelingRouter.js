@@ -1,18 +1,18 @@
 const router = require("express").Router();
-const Customer = require("../models/customerModel");
+const Feeling = require("../models/feelingModel");
 const auth = require("../middleware/auth");
 
 router.post("/", auth, async (req, res) => {
   try {
     const { name } = req.body;
 
-    const newCustomer = new Customer({
-      name,
+    const newFeeling = new Feeling({
+      username,title,feeling,tothevoid,date
     });
 
-    const savedCustomer = await newCustomer.save();
+    const savedFeeling = await newFeeling.save();
 
-    res.json(savedCustomer);
+    res.json(savedFeeling);
   } catch (err) {
     console.error(err);
     res.status(500).send();
@@ -21,8 +21,8 @@ router.post("/", auth, async (req, res) => {
 
 router.get("/", auth, async (req, res) => {
   try {
-    const customers = await Customer.find();
-    res.json(customers);
+    const feelings = await Feeling.find();
+    res.json(feelings);
   } catch (err) {
     console.error(err);
     res.status(500).send();
