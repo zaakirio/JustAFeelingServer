@@ -108,6 +108,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//Log user out
 router.get("/logout", (req, res) => {
   res
     .cookie("token", "", {
@@ -119,6 +120,7 @@ router.get("/logout", (req, res) => {
     .send();
 });
 
+//Check user logged in
 router.get("/loggedIn", (req, res) => {
   try {
     const token = req.cookies.token;
