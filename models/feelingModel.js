@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-//DB SCHEMA
+//DB SCHEMA ie, requirements for posting a feeling
 const feelingSchema = mongoose.Schema({
     username: {
         type: String,
@@ -15,6 +15,11 @@ const feelingSchema = mongoose.Schema({
         maxLength: 1000,
         trim: true
     },
+    tothevoid: {
+        type: Boolean,
+        required: true,
+    },
+    
     date: {
       type: Date,
       required: true,

@@ -2,19 +2,19 @@ const router = require("express").Router();
 const Feeling = require("../models/feelingModel");
 const auth = require("../middleware/auth");
 
-router.post("/", auth, async (req, res) => {
+router.post("/feelings", auth, async (req, res) => {
   try {
-    const { name } = req.body;
+    const {username,feeling,tothevoid} = req.body;
 
     const newFeeling = new Feeling({
-      username,title,feeling,tothevoid,date
+      username,feeling,tothevoid
     });
 
     const savedFeeling = await newFeeling.save();
 
     res.json(savedFeeling);
   } catch (err) {
-    console.error(err);
+    console.error(err); 
     res.status(500).send();
   }
 });
