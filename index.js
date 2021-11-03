@@ -6,10 +6,10 @@ const cors = require("cors");
 
 dotenv.config();
 
-//Set up Server
+//Server config
 const app = express();
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
+app.listen(PORT, () => console.log(`Server started on port: ${PORT} :-)`));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -22,7 +22,7 @@ app.use(
   })
 );
 
-//Connect to MongoDB
+//MongoDB Connection
 mongoose.connect(
   process.env.CONNECTION_STRING,
   {
@@ -35,5 +35,6 @@ mongoose.connect(
   }
 );
 
-//Route
+//Routing
 app.use("/auth", require("./router/userRouter"));
+app.use("/feeling", require("./router/feelingRouter"));

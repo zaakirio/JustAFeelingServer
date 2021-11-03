@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema({
     passwordHash: {
         type: String,
         required: true,
-        minLength: 8
+        minLength: 8,
         //maxLength: 50
     },
     date: {
@@ -22,5 +22,4 @@ const userSchema = mongoose.Schema({
 });
 //Access MongoDB
 const User = mongoose.model("user", userSchema);
-
 module.exports = User;

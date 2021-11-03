@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 router.post("/", async (req, res) => {
   try {
     const { username, password, passwordVerify } = req.body;
-
+   
     //Validation
     ///Check all fields for input
     if (!username || !password || !passwordVerify)
@@ -74,7 +74,7 @@ router.post("/login", async (req, res) => {
       return res
         .status(400)
         .json({ errorMessage: "Please enter all required fields." });
-    //Vali
+    //Validation
     const existingUser = await User.findOne({ username });
     if (!existingUser)
       return res.status(401).json({ errorMessage: "Wrong username or password." });

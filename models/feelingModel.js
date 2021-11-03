@@ -1,24 +1,24 @@
 const mongoose = require("mongoose");
 //DB SCHEMA ie, requirements for posting a feeling
 const feelingSchema = mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-        minLength: 4,
-        maxLength: 12,
-        trim: true
-    },
+    // username: {
+    //     type: String,
+    //     required: true,
+    //     minLength: 4,
+    //     maxLength: 12,
+    //     trim: true
+    // },
     feeling: {
         type: String,
         required: true,
-        minLength: 50,
+        minLength: 8,
         maxLength: 1000,
         trim: true
     },
-    tothevoid: {
-        type: Boolean,
-        required: true,
-    },
+    // tothevoid: {
+    //     type: Boolean,
+    //     required: true,
+    // },
     
     date: {
       type: Date,
@@ -27,6 +27,6 @@ const feelingSchema = mongoose.Schema({
     }
 });
 //Access MongoDB
-const Feeling = mongoose.model("feeling", userSchema);
+const Feeling = mongoose.model("feeling", feelingSchema);
 
 module.exports = Feeling;
